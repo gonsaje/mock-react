@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 
@@ -6,24 +5,15 @@ class App extends React.Component { // components allow for more functionality
   constructor() {
     super(); // calls constrcutor method on component class gives access to this.state
     this.state = {
-      people: [
-        {
-          name: "Frank",
-          id: "123"
-
-        },
-        {
-          name: "Bob",
-          id: "456"
-        },
-        {
-          name: "Joe",
-          id:"789"
-        }
-      ]
+      people: []
     }
   }
   
+  componentDidMount() { //  grabs data from api and sets state after mounting
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(users => this.setState({people: users}))
+  }
 
   render() {
     return (
